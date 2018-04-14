@@ -1,6 +1,27 @@
 use Mix.Config
 
 #
+# Key-module mappings. Required for now.
+# TODO: This should probably be done in some kind of registry system?
+#
+
+alias DynamicServerManager.Server
+config :dynamic_server_manager, server_module_map: %{
+  aws: Server.Aws,
+  cloudsigma: Server.CloudSigma,
+  digitalocean: Server.DigitalOcean,
+  profitbricks: Server.ProfitBricks,
+  dummy: Server.Dummy,
+}
+
+alias DynamicServerManager.Dns
+config :dynamic_server_manager, dns_module_map: %{
+  aws: Dns.Aws,
+  dummy: Dns.Dummy,
+}
+
+
+#
 # Plugin config.
 #
 

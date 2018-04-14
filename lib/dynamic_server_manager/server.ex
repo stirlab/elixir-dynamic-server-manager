@@ -22,17 +22,6 @@ defmodule DynamicServerManager.Server do
 
   require Logger
 
-  alias DynamicServerManager.Server
-
-  # TODO: This should probably be done in some kind of registry system?
-  @server_module_map %{
-    aws: Server.Aws,
-    cloudsigma: Server.CloudSigma,
-    digitalocean: Server.DigitalOcean,
-    profitbricks: Server.ProfitBricks,
-    dummy: Server.Dummy,
-  }
-
   def build_config(key, location, server, overrides \\ %{}) do
     provider = Application.fetch_env!(:dynamic_server_manager, key)
     locations = Keyword.get(provider, :locations)
@@ -55,7 +44,7 @@ defmodule DynamicServerManager.Server do
   end
 
   def get_module(provider) when is_atom(provider) do
-    @server_module_map |> Map.fetch!(provider)
+    Application.fetch_env!(:dynamic_server_manager, :server_module_map) |> Map.fetch!(provider)
   end
 
   def make_hostname(prefix \\ "server") do
