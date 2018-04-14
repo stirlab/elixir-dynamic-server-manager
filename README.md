@@ -40,6 +40,18 @@ See the [sample configuration](config/config.sample.exs)
 See the [example usage](lib/example.ex)
 
 
+## Currently supported providers
+
+ * Server:
+   * [AWS EC2](https://aws.amazon.com/ec2)
+   * [CloudSigma](https://www.cloudsigma.com)
+   * [DigitalOcean](https://www.digitalocean.com)
+   * [ProfitBricks](https://www.profitbricks.com)
+
+ * DNS:
+   * [AWS Route53](https://aws.amazon.com/route53)
+
+
 ## Writing new providers
 
 They are based on the behaviours as defined in the following modules:
