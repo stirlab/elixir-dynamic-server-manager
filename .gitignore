@@ -1,5 +1,4 @@
-config/base.exs
-config/config.exs
+config/*.exs
 
 # The directory Mix will write compiled artifacts to.
 /_build/
