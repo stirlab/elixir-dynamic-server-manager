@@ -52,6 +52,15 @@ defmodule DynamicServerManager.Mixfile do
 
     Server: create based on snapshot, destroy, query for basic information.
     DNS: Create/destroy A records for configured domains.
+
+    Currently supports the following server providers:
+     - AWS EC2
+     - CloudSigma
+     - DigitalOcean
+     - ProfitBricks
+
+    And the following DNS providers:
+     - AWS Route53
     """
   end
 
