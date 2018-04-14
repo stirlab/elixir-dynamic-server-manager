@@ -37,7 +37,7 @@ See the [sample configuration](config/config.sample.exs)
 
 ## Usage
 
-See the [example usage](lib/dynamic_server_manager/example.ex)
+See the [example usage](lib/example.ex)
 
 
 ## Writing new providers
