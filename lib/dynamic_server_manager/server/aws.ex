@@ -95,7 +95,7 @@ defmodule DynamicServerManager.Server.Aws do
   def list_servers(location, minutes_old \\ nil) when is_atom(location) and (is_nil(minutes_old) or is_integer(minutes_old) and minutes_old > 0) do
     Logger.debug fn -> {"Listing servers for location #{location}", @logger_metadata} end
     # TODO: Refactor to get paged results.
-    xml = EC2.describe_instances([max_results: 1000]) |> ExAws.request(region: Server.get_location(@plugin, location).region)
+    xml = EC2.describe_instances([filters: [{"instance-state-name", "running"}], max_results: 1000]) |> ExAws.request(region: Server.get_location(@plugin, location).region)
     case xml do
       { :ok, ret } ->
         servers = parse_server_list_data(ret.body)
