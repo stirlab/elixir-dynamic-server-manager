@@ -7,6 +7,17 @@ defmodule DynamicServerManager.Dns.Aws do
 
   @logger_metadata [plugin: :dns_aws]
 
+  def up() do
+    result = list_zones()
+    case result do
+      {:ok, %{status_code: 200}} ->
+        true
+      error ->
+        Logger.error fn -> {"Error getting provider up value: " <> inspect(error), @logger_metadata} end
+        false
+    end
+  end
+
   def get_record(zone_name, hostname) do
     zone_id = get_zone_id(zone_name)
     result = Route53.list_record_sets(zone_id, [name: make_fqdn(zone_name, hostname)]) |> ExAws.request

@@ -9,6 +9,9 @@ defmodule DynamicServerManager.Dns.Dummy do
 
   @default_config %{
     request_wait_time: 0,
+    up_response: true,
+    up_changes: [true],
+    up_responses: [],
     get_record_response: {:ok, %{
       type: :a,
       ttl: 60,
@@ -24,6 +27,14 @@ defmodule DynamicServerManager.Dns.Dummy do
 
   def start_link(config \\ %{}) do
     Agent.start_link(fn -> Map.merge(@default_config, config) end, [name: @name])
+  end
+
+  def up() do
+    %{
+      request_wait_time: milliseconds,
+    } = get_config()
+    :timer.sleep(div(milliseconds, 10))
+    get_next_response("up")
   end
 
   def get_record(_zone_name, _hostname) do
@@ -60,6 +71,31 @@ defmodule DynamicServerManager.Dns.Dummy do
 
   def reset_config(config \\ %{}) do
     Agent.update(@name, fn(_state) -> Map.merge(@default_config, config) end)
+  end
+
+  def get_up_response() do
+    Agent.get(@name, &Map.get(&1, :up_response))
+  end
+
+  def update_up_response(response) do
+    Agent.update(@name, &Map.merge(&1, %{up_response: response}))
+  end
+
+  def get_up_changes() do
+    Agent.get(@name, &Map.get(&1, :up_changes))
+  end
+
+  def update_up_changes(changes) do
+    Agent.update(@name, &Map.merge(&1, %{up_changes: changes}))
+  end
+
+  def get_up_responses() do
+    Agent.get(@name, &Map.get(&1, :up_responses))
+  end
+
+  def add_up_response(response) do
+    responses = get_up_responses() ++ [response]
+    Agent.update(@name, &Map.merge(&1, %{up_responses: responses}))
   end
 
   def get_get_record_response() do
