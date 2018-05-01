@@ -22,6 +22,41 @@ defmodule DynamicServerManager.Server do
 
   require Logger
 
+  def up(provider_label, location) do
+    provider = get_module(provider_label)
+    provider.up(location)
+  end
+
+  def config(provider_label, location, server, overrides \\ %{}) do
+    provider = get_module(provider_label)
+    provider.config(location, server, overrides)
+  end
+
+  def create_from_snapshot(provider_label, specs) do
+    provider = get_module(provider_label)
+    provider.create_from_snapshot(specs)
+  end
+
+  def status(provider_label, metadata) do
+    provider = get_module(provider_label)
+    provider.status(metadata)
+  end
+
+  def info(provider_label, metadata) do
+    provider = get_module(provider_label)
+    provider.info(metadata)
+  end
+
+  def destroy(provider_label, metadata) do
+    provider = get_module(provider_label)
+    provider.destroy(metadata)
+  end
+
+  def list_servers(provider_label, location, minutes_old \\ nil) do
+    provider = get_module(provider_label)
+    provider.list_servers(location, minutes_old)
+  end
+
   def build_config(key, location, server, overrides \\ %{}) do
     provider = Application.fetch_env!(:dynamic_server_manager, key)
     locations = Keyword.get(provider, :locations)
