@@ -44,6 +44,7 @@ defmodule DynamicServerManager.Server.Aws do
     server_created = run_instance(specs.location.region, specs.ami, opts)
     case server_created do
       {:ok, server_id} ->
+        Logger.info fn -> {"Created server #{server_id} from from AMI #{specs.ami} in region #{specs.location.region}", @logger_metadata} end
         {:ok, %{
           provider: :aws,
           location: specs.location,

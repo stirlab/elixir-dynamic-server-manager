@@ -44,8 +44,8 @@ defmodule DynamicServerManager.Server.DigitalOcean do
     response = DigitalOcean.post("/droplets", data)
     case response do
       {:ok, env = %Tesla.Env{status: 202}} ->
-        Logger.info fn -> {"Created server from snapshot #{specs.image} in region #{specs.location.region}", @logger_metadata} end
         server_id = env.body["droplet"]["id"]
+        Logger.info fn -> {"Created server #{server_id} from snapshot #{specs.image} in region #{specs.location.region}", @logger_metadata} end
         {:ok, %{
           provider: :digitalocean,
           location: specs.location,

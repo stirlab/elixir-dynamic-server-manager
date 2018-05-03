@@ -34,6 +34,7 @@ defmodule DynamicServerManager.Server.ProfitBricks do
          :ok <- volume_check_state_available(datacenter_id, volume_id, "INACTIVE"),
          {:ok, server_id} <- create_server(datacenter_id, specs.fqdn, specs.cpuFamily, specs.cores, specs.ram, volume_id, lan_id)
     do
+      Logger.info fn -> {"Created server #{server_id} from snapshot #{specs.image} in datacenter #{datacenter_id}, location #{specs.location.region_location}", @logger_metadata} end
       {:ok, %{
         provider: :profitbricks,
         location: %{

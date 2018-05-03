@@ -166,8 +166,8 @@ defmodule DynamicServerManager.Server.CloudSigma do
     server_cloned = CloudSigma.post(client, "/servers/#{uuid}/action/", %{}, query: [do: "clone"])
     case server_cloned do
       {:ok, env = %Tesla.Env{status: 202}} ->
-        Logger.info fn -> {"Cloned server #{uuid} in location #{location}", @logger_metadata} end
         server_id = env.body["uuid"]
+        Logger.info fn -> {"Cloned server #{server_id} from server #{uuid} in location #{location}", @logger_metadata} end
         {:ok, server_id}
       error ->
         message = "Error cloning server #{uuid} in location #{location}"
