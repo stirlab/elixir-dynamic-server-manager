@@ -4,7 +4,7 @@ defmodule DynamicServerManager.Mixfile do
   def project do
     [
       app: :dynamic_server_manager,
-      version: "0.0.7",
+      version: "0.0.8",
       elixir: "~> 1.6",
       start_permanent: Mix.env == :prod,
       package: package(),
@@ -64,7 +64,7 @@ defmodule DynamicServerManager.Mixfile do
       {:profitbricks_api_wrapper, "~> 0.2"},
       {:hackney, "~> 1.13"},
       {:sweet_xml, "~> 0.6"},
-      {:poison, "~> 4.0"},
+      {:poison, "~> 3.1.0"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.3.0"},
       {:tesla, "~> 1.1.0"},
