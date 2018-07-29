@@ -4,7 +4,7 @@ defmodule DynamicServerManager.Mixfile do
   def project do
     [
       app: :dynamic_server_manager,
-      version: "0.0.6",
+      version: "0.0.7",
       elixir: "~> 1.6",
       start_permanent: Mix.env == :prod,
       package: package(),
@@ -59,14 +59,16 @@ defmodule DynamicServerManager.Mixfile do
       {:ex_aws, "~> 2.0"},
       {:ex_aws_ec2, "~> 2.0"},
       {:ex_aws_route53, "~> 2.0"},
-      {:cloudsigma_api_wrapper, "~> 0.1"},
-      {:digitalocean_api_wrapper, "~> 0.1"},
-      {:profitbricks_api_wrapper, "~> 0.1"},
-      {:hackney, "~> 1.12"},
+      {:cloudsigma_api_wrapper, "~> 0.2"},
+      {:digitalocean_api_wrapper, "~> 0.2"},
+      {:profitbricks_api_wrapper, "~> 0.2"},
+      {:hackney, "~> 1.13"},
       {:sweet_xml, "~> 0.6"},
-      {:poison, "~> 3.1.0"},
+      {:poison, "~> 4.0"},
       {:uuid, "~> 1.1"},
-      {:timex, "~> 3.2"},
+      {:timex, "~> 3.3.0"},
+      {:tesla, "~> 1.1.0"},
+      {:jason, "~> 1.1.0"},
     ]
   end
 

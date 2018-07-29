@@ -17,10 +17,9 @@ defmodule DynamicServerManager.Example do
   @logger_metadata []
   @deployment_images Application.get_env(:dynamic_server_manager, :deployment_images)
 
-  plug Tesla.Middleware.Tuples, rescue_errors: :all
   plug Tesla.Middleware.JSON
-  if Application.get_env(:dynamic_server_manager, :debug_http) do
-    plug Tesla.Middleware.DebugLogger
+  if Application.get_env(:dynamic_server_manager, :enable_tesla_log, false) do
+    plug Tesla.Middleware.Logger
   end
 
   def create(server_provider_label \\ :dummy, location \\ :one, dns_provider_label \\ :dummy, domain \\ "example.com", server \\ :small) do
