@@ -64,7 +64,7 @@ defmodule DynamicServerManager.Mixfile do
       {:profitbricks_api_wrapper, "~> 0.2"},
       {:hackney, "~> 1.13"},
       {:sweet_xml, "~> 0.6"},
-      {:poison, "~> 4.0.0"},
+      {:poison, "~> 3.0"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.4.0"},
       {:tesla, "~> 1.2.0"},
