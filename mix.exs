@@ -4,7 +4,7 @@ defmodule DynamicServerManager.Mixfile do
   def project do
     [
       app: :dynamic_server_manager,
-      version: "0.0.9",
+      version: "0.0.10",
       elixir: "~> 1.7",
       start_permanent: Mix.env == :prod,
       package: package(),
